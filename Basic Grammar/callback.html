@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Callback Example</title>
+</head>
+
+<body>
+    <p>
+        <a href="javascript: alert('Hello, world!')">这是一个在a标签内调用JS语句的实例</a>
+    </p>
+
+    <div onclick="alert('Hello, world!')">
+        <p>这是一个通过div标签动作调用JS语句的实例</p>
+    </div>
+
+    <script>
+        function showMessage() {
+            alert('Hello world on launch!');
+        }
+        showMessage();
+    </script>
+
+    <script src="callback_refer.js"></script>
+</body>
+
+</html>
