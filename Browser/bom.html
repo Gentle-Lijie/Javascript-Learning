@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <title>BOM - Browser Object Model</title>
+    <style>
+        @import url("../styles.css");
+
+        body {
+            height: 3000px;
+            width: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="open">Open Window</button>
+    <button id="close">Close Window</button>
+    <button id="scroll" style="position:fixed; top:10px; right:10px;">Scroll Window</button>
+    <script>
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        console.log("Width: " + w + ", Height: " + h);
+        // alert("Width: " + w + ", Height: " + h);
+        // var ret = confirm("Width: " + w + ", Height: " + h);
+        // console.log("User response: " + ret);
+        // ret = prompt("Width: " + w + ", Height: " + h);
+        // console.log("User input: " + ret);
+
+        // create vars to 
+        var popupWindow;
+        var openBtn = document.getElementById('open');
+        var closeBtn = document.getElementById('close');
+
+        openBtn.onclick = function () {
+            console.log("Opening new window...");
+            window.open("https://google.com", "Google", "width=600,height=400");
+        }
+
+        closeBtn.onclick = function () {
+            window.close();
+        }
+    </script>
+    <script>
+        window.onclick = function () {
+            console.log("Window clicked!");
+        }
+        window.onload = function () {
+            console.log("Window loaded!");
+        }
+        window.onresize = function () {
+            console.log("Window resized to: " + window.innerWidth + "x" + window.innerHeight);
+        }
+        window.onscroll = function () {
+            console.log("Window scrolled to: " + window.scrollX + "," + window.scrollY);
+        }
+        window.ondblclick = function () {
+            console.log("Window double clicked!");
+        }
+        window.onkeypress = function (event) {
+            console.log("Key pressed: " + event.key);
+        }   
+    </script>
+    <script>
+        var scrollBtn = document.getElementById('scroll');
+        scrollBtn.onclick = function () {
+            window.scrollTo(0, 0);
+            window.scrollTo({
+                top: Math.random() * 2000,
+                left: Math.random() * 2000,
+                behavior: "smooth",
+                duration: 1000
+            })
+        }
+    </script>
+</body>
+
+</html>

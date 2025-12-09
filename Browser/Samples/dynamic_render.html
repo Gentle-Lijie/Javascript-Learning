@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dynamic Tables</title>
+    <link rel="stylesheet" href="../../styles.css" />
+    <style>
+        /* 小幅补充表格样式以配合全局样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        thead th {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid #eef2f7;
+            background: #fafafa;
+            font-weight: 700;
+        }
+
+        tbody td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: var(--text);
+        }
+
+        .chip {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            background: #f3f4f6;
+            color: var(--muted);
+        }
+
+        .actions .btn {
+            padding: 0.35rem 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .controls .search {
+            flex: 1 1 220px;
+            max-width: 360px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var users = [
+            { id: 1, name: "王小明", email: "xiaoming.wang@example.com", status: "active" },
+            { id: 2, name: "李丽", email: "li.li@example.com", status: "inactive" },
+            { id: 3, name: "张强", email: "zhang.qiang@example.com", status: "active" }
+        ];
+        window.onload = function () {
+            updateCount();
+        };
+        function updateCount() {
+            usercnt = users.length;
+            document.getElementById("count").innerText = usercnt;
+        }
+        function generateRandomString(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            const charactersLength = characters.length;
+
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+
+            return result;
+        }
+        function refreshContent() {
+            document.getElementById("tbody").innerHTML = "";
+            for (let i = 0; i < users.length; i++) {
+                renderRow(users[i], i);
+            }
+            function renderRow(user, index) {
+                const tbody = document.getElementById("tbody");
+                const tr = document.createElement("tr");
+                tr.innerHTML += "<td>" + user.id + "</td>\n<td>" + user.name + "</td>\n<td>" + user.email + "</td>\n<td><span class=\"chip\">" + user.status + "</span></td>\n <td class=\"actions\">\n<button type=\"button\" class=\"btn edit\">Change Status</button>\n<button type=\"button\" class=\"btn delete\">Delete</button>\n</td>";
+                tbody.appendChild(tr);
+
+                // 立即为当前行的删除按钮绑定处理器（捕获当前索引）
+                const deleteBtn = tr.querySelector('.btn.delete');
+                if (deleteBtn) {
+                    deleteBtn.onclick = function () {
+                        users.splice(index, 1);
+                        console.log("Deleting user at index:", index);
+                        refreshContent();
+                    };
+                }
+
+                const changeStatusBtn = tr.querySelector('.btn.edit');
+                if (changeStatusBtn) {
+                    changeStatusBtn.onclick = function () {
+                        users[index].status = users[index].status === "active" ? "inactive" : "active";
+                        console.log("Changing status for user at index:", index);
+                        refreshContent();
+                    }
+                }
+            }
+            updateCount();
+        }
+
+    </script>
+    <main class="container mt-3">
+        <header class="mb-3">
+            <h1>User List</h1>
+            <p>Demonstrates how to dynamically render and filter table data using JavaScript and the project's global
+                stylesheet.</p>
+        </header>
+
+        <section class="card">
+            <div class="controls mb-2">
+                <button id="addBtn" class="btn">Add Random User</button>
+                <div style="margin-left:auto" class="small text-center">Total: <span id="count">
+
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table aria-describedby="table-desc">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <!-- 动态渲染行 -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 简洁的示例数据与渲染逻辑
+        refreshContent()
+        var generateRandomBtn = document.getElementById("addBtn");
+        generateRandomBtn.onclick = function generateRandom() {
+            var name = generateRandomString(5);
+            users.push({
+                id: users[usercnt - 1].id + 1,
+                name: name,
+                email: name + "@example.com",
+                status: "active"
+            })
+            refreshContent();
+        }
+
+    </script>
+</body>
+
+</html>

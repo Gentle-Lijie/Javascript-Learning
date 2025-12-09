@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <title>DOM - Document Object Model</title>
+    <style>
+        @import url("../styles.css");
+
+        body {
+            height: 3000px;
+            width: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>第一行</div>
+    <div class="row2">第二行</div>
+    <div id="row3">
+        <p>第三行</p>
+    </div>
+    <div style="color: red;">第四行</div>
+    <button class="btn" id="A">Change content via text</button>
+    <button class="btn" id="B">Change content via HTML</button>
+    <br />
+    <button class="btn" id="C">Change Row3 ID</button>
+    <button class="btn" id="D">Make Row3 H1</button>
+    <button class="btn" id="E">Make Row3's p tag H1</button>
+    <script>
+        console.log("Accessing DOM elements:");
+        var ele = document.getElementsByTagName("div");
+        console.log("All div elements:", ele);
+        var row2 = document.getElementsByClassName("row2");
+        console.log("Elements with class 'row2':", row2);
+        // Note that row2 is a collection(object), not an array.
+        console.log("Type of row2:", typeof row2);
+        var row3 = document.getElementById("row3");
+        console.log("Element with id 'row3':", row3);
+        var row4 = document.querySelector("div");
+        console.log("First div using querySelector:", row4);
+        var row4_all = document.querySelectorAll("div");
+        console.log("All divs using querySelectorAll:", row4_all);
+
+
+
+        var btnA = document.getElementById("A");
+        var btnB = document.getElementById("B");
+        var btnC = document.getElementById("C");
+        var btnD = document.getElementById("D");
+        var btnE = document.getElementById("E");
+
+        console.log(row3.innerText);
+        console.log(row3.innerHTML);
+        btnA.onclick = function () {
+            row3.innerText = "内容被修改了！";
+        }
+        btnB.onclick = function () {
+            row3.innerHTML = "<p><strong>内容被<strong><u>HTML</u>修改了！</p>";
+        }
+        console.log(row3.getAttributeNames());
+        console.log("ID attribute of row3:", row3.getAttribute("id"));
+        console.log(row3.getAttribute(row3.getAttributeNames()[0]));
+
+        btnC.onclick = function () {
+            row3.id = row3.id + "_modified";
+        }
+
+        btnD.onclick = function () {
+            console.log(row3.className);
+            row3.className = "h1";
+        }
+
+        btnE.onclick = function () {
+            var pTag = row3.getElementsByTagName("p")[0];
+            pTag.className = "h1";
+        }
+
+        console.log("The background color of the first button is: " + window.getComputedStyle(document.querySelector("button")).backgroundColor);
+    </script>
+</body>
+
+</html>

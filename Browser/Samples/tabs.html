@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tabs</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab btn" id="tab1" type="button">Tab One</button>
+            <button class="tab btn" id="tab2" type="button">Tab Two</button>
+            <button class="tab btn" id="tab3" type="button">Tab Three</button>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab1" style="display:none">
+                <h1>Content One</h1>
+                <p>This is the content of the first tab.</p>
+            </div>
+
+            <div class="tab2" style="display:none">
+                <h1>Content Two</h1>
+                <p>This is the content of the second tab.</p>
+            </div>
+
+            <div class="tab3" style="display:none">
+                <h1>Content Three</h1>
+                <p>This is the content of the third tab.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional: simple JS example to toggle .active -->
+    <script>
+        var button1 = document.getElementById("tab1");
+        var button2 = document.getElementById("tab2");
+        var button3 = document.getElementById("tab3");
+        var tab1 = document.getElementsByClassName("tab1")[0];
+        var tab2 = document.getElementsByClassName("tab2")[0];
+        var tab3 = document.getElementsByClassName("tab3")[0];
+        button1.onclick = function () {
+            if (tab1.style.display == "none") {
+                tab1.style.display = "block";
+                button1.classList.add("selected");
+                button2.classList.remove("selected");
+                button3.classList.remove("selected");
+                tab2.style.display = "none";
+                tab3.style.display = "none";
+            }
+        }
+        button2.onclick = function () {
+            if (tab2.style.display == "none") {
+                tab2.style.display = "block";
+                button2.classList.add("selected");
+                button1.classList.remove("selected");
+                button3.classList.remove("selected");
+                tab1.style.display = "none";
+                tab3.style.display = "none";
+            }
+        }
+        button3.onclick = function () {
+            if (tab3.style.display == "none") {
+                tab3.style.display = "block";
+                button3.classList.add("selected");
+                button1.classList.remove("selected");
+                button2.classList.remove("selected");
+                tab2.style.display = "none";
+                tab1.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

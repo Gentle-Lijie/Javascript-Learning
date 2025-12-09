@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Go to Top Example</title>
+    <style>
+        @import url("../../styles.css");
+
+        body {
+            height: 3000px;
+            width: 3000px;
+        }
+
+        .header {
+            position: fixed;
+            top: -80px;
+            left: 0 fixed;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            background: linear-gradient(90deg, rgba(10, 102, 194, 0.95), var(--primary) 60%);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            z-index: 1000;
+            transition: top 0.3s ease-in-out;
+        }
+
+        .gotoTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+            display: none;
+            transition: display 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header h1">Top Navbar</div>
+    <div class="gotoTop">Go to Top</div>
+    <script>
+        window.onscroll = function () {
+            if (window.scrollY >= 300) {
+                document.querySelector('.gotoTop').style.display = 'block';
+                document.querySelector('.header').style.top = 0;
+            } else {
+                document.querySelector('.gotoTop').style.display = 'none';
+                document.querySelector('.header').style.top = '-80px'; // Note that all should be bracketed in strings
+            }
+        }
+        var gotoTopButton = document.querySelector(".gotoTop");
+        gotoTopButton.onclick = function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+        }
+    </script>
+</body>
+
+</html>

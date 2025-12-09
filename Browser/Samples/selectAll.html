@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Selection List with Choose All</title>
+    <link rel="stylesheet" src="../../styles.css" />
+</head>
+
+<body>
+    <h1>Select Items</h1>
+    <form>
+        <fieldset>
+            <legend>Options</legend>
+            <label> <input type="checkbox" id="choose-all" /> Choose All
+            </label>
+            <ul>
+                <li> <label><input type="checkbox" name="items" value="option1" /> Option 1 </label> </li>
+                <li> <label> <input type="checkbox" name="items" value="option2" /> Option 2 </label> </li>
+                <li> <label> <input type="checkbox" name="items" value="option3" /> Option 3 </label> </li>
+                <li> <label> <input type="checkbox" name="items" value="option4" /> Option 4 </label> </li>
+            </ul>
+        </fieldset>
+    </form>
+    <script>
+        var chooseAll = document.querySelector("input");
+        chooseAll.onclick = function () {
+            var isChecked = chooseAll.checked;
+            console.log("Status: ", isChecked);
+            //chooseAll.checked = isChecked ? false : true;
+            // if (isChecked) chooseAll.checked = Boolean(false);
+            // else chooseAll.checked = Boolean(true);
+            var items = document.getElementsByName("items");
+            for (item in items) {
+                items[item].checked = chooseAll.checked;
+            }
+        }
+        // Make sure select-all is refreshed as clicked
+        var items = document.getElementsByName("items");
+        for (item of items) {
+            item.onclick = function () {
+                var currentSelectallState = chooseAll.checked;
+                console.log("Current Select All State: ", currentSelectallState);
+                var check = 0;
+                for (item of items) if (item.checked) check++;
+                console.log("Number of items checked: ", check);
+                if (check == 4) chooseAll.checked = true;
+                else chooseAll.checked = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

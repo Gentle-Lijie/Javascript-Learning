@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>DOM - Document Object Model (2)</title>
+    <link rel="stylesheet" src="../styles.css" />
+</head>
+
+<body>
+    <div class="div1">
+        <p>这是一个 demo div段落</p>
+    </div>
+    <script>
+        var div = document.createElement("div");
+        div.classList.add("new-div");
+        console.log(div);
+        div.innerText = "这是一个新创建的div元素";
+        div.innerHTML += "<p class='p-in-div'>这是div内的一个段落</p>";
+        // document.querySelector(".div1").appendChild(div);
+        document.querySelector(".div1").insertBefore(div, document.querySelector(".div1 p"));
+        document.getElementsByClassName("p-in-div")[0].remove();
+        // document.querySelector(".div1").removeChild(document.getElementsByClassName("new-div")[0]);
+
+        var div2 = document.createElement("div");
+        div2.innerText = "这是另一个新创建的div元素";
+        div2.classList.add("new-div-2");
+        console.log(div2);
+        document.getElementsByClassName("div1")[0].replaceChild(div2, document.getElementsByClassName("new-div")[0]);
+
+        document.querySelector(".div1").appendChild(document.getElementsByClassName("div1")[0].cloneNode(true));
+    </script>
+</body>
+
+</html>

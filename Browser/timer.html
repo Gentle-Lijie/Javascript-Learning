@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>Timer Example</title>
+    <style>
+        @import url("../styles.css");
+
+        body {
+            height: 3000px;
+            width: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="clearInterval">Clear Interval</button>
+    <button id="clearTimeout">Clear Timeout</button>
+    <script>
+        var interval_id = setInterval(function () {
+            console.log("Interval tick: " + new Date().toLocaleTimeString());
+        }, 2000);
+        var timeout_id = setTimeout(function () {
+            console.log("Timeout executed at: " + new Date().toLocaleTimeString());
+        }, 5000);
+        console.log("Interval ID: " + interval_id);
+        console.log("Timeout ID: " + timeout_id);
+        var clearIntervalBtn = document.getElementById('clearInterval');
+        var clearTimeoutBtn = document.getElementById('clearTimeout');
+
+        clearIntervalBtn.onclick = function () {
+            clearInterval(interval_id);
+            console.log("Interval cleared");
+        }
+
+        clearTimeoutBtn.onclick = function () {
+            clearTimeout(timeout_id);
+            console.log("Timeout cleared");
+        }
+    </script>
+</body>
+
+</html>
