@@ -1,0 +1,25 @@
+{
+  "HTML Template": {
+    "prefix": "html-template",
+    "body": [
+      "<!doctype html>",
+      "<html lang=\"en\">",
+      "<head>",
+      "  <meta charset=\"utf-8\">",
+      "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+      "  <title>${1:${TM_FILENAME_BASE}}</title>",
+      "</head>",
+      "<body>",
+      "  <h1>${1:${TM_FILENAME_BASE}}</h1>",
+      "  <div id=\"app\">",
+      "    <!-- Your content here -->",
+      "  </div>",
+      "  <script>",
+      "    (function() {\n      'use strict';\n\n      console.log('File: ${1:${TM_FILENAME_BASE}}');\n\n      // Start coding...\n    })();",
+      "  </script>",
+      "</body>",
+      "</html>"
+    ],
+    "description": "Standard HTML template with a JavaScript area"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "github.copilot.enable": {
+    "*": true
+  },
+  "github.copilot.inlineSuggest.enable": true,
+  "github.copilot.chat.enable": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  // Template/task helpers
+  "files.defaultLanguage": "html",
+  "editor.snippetSuggestions": "top",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  // Note: To create a new HTML file from template, run the task "New HTML from template" (Terminal -> Run Task...).
+  // Or use the "html-template" snippet by typing the prefix and pressing Tab.
+  // Fully automatic injection on every new file is not supported natively by VS Code; a task or snippet is the recommended approach.
+  "workspace.autoDetect": true
+}
