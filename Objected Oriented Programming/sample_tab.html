@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tabs (OOP)</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="tabs">
+        <button class="btn selected" id="tab1" type="button">Tab One</button>
+        <button class="btn" id="tab2" type="button">Tab Two</button>
+        <button class="btn" id="tab3" type="button">Tab Three</button>
+      </div>
+
+      <div class="tab-content">
+        <div class="tab" style="display: none">
+          <h1>Content One</h1>
+          <p>This is the content of the first tab.</p>
+        </div>
+
+        <div class="tab" style="display: none">
+          <h1>Content Two</h1>
+          <p>This is the content of the second tab.</p>
+        </div>
+
+        <div class="tab" style="display: none">
+          <h1>Content Three</h1>
+          <p>This is the content of the third tab.</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function Tabs(ele) {
+        this.ele = document.querySelector(ele);
+        this.buttons = this.ele.querySelectorAll(".btn");
+        this.tabs = this.ele.querySelectorAll(".tab");
+      }
+      Tabs.prototype.change = function () {
+        // Create event for every clickable element
+        for (let i = 0; i < this.buttons.length; i++) {
+          let button = this.buttons[i];
+          button.setAttribute("data-index", i);
+          const tabs = this.tabs;
+          const buttons = this.buttons;
+          button.onclick = function () {
+            for (const tab of tabs) {
+              tab.style.display = "none";
+            }
+            for (const btn of buttons) {
+              btn.classList.remove("selected");
+            }
+            // Here, this is the target of onclick
+            console.log(this.getAttribute("data-index"));
+            console.log(tabs);
+            this.classList.add("selected");
+            tabs[this.getAttribute("data-index")].style.display = "block";
+          };
+        }
+      };
+      var tab = new Tabs("div.container");
+      tab.change();
+      console.log(tab);
+    </script>
+  </body>
+</html>

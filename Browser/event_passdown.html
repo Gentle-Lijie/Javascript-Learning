@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Nested Divs — outer / center / inner</title>
+    <!-- styles.css (relative to d:\DEV\JS\Browser\event_passdown.html) -->
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+        /* small visual cues for the three layers */
+        .outer {
+            background: #f8fafc;
+            border-color: #e6eef8;
+            padding: 1rem;
+        }
+
+        .center {
+            background: #eef2ff;
+            border-color: #dbeafe;
+            padding: 1rem;
+        }
+
+        .inner {
+            background: #fff7ed;
+            border-color: #ffedd5;
+            padding: 1rem;
+        }
+
+        .layer-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container mt-3">
+        <div id="outer" class="card outer">
+            <div class="layer-title">Outer (level 1)</div>
+            <p class="mb-2">This is the outermost container.</p>
+
+            <div id="center" class="card center">
+                <div class="layer-title">Center (level 2)</div>
+                <p class="mb-2">This is the center container nested inside the outer container.</p>
+
+                <div id="inner" class="card inner">
+                    <div class="layer-title">Inner (level 3)</div>
+                    <p class="mb-2">This is the innermost container.</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <button class="button">Primary</button>
+                        <button class="btn btn--ghost">Ghost</button>
+                    </div>
+                </div>
+                <!-- /.inner -->
+            </div>
+            <!-- /.center -->
+        </div>
+        <!-- /.outer -->
+    </main>
+    <script>
+        var outer = document.getElementById('outer');
+        var center = document.getElementById('center');
+        var inner = document.getElementById('inner');
+        var buttonGhost = inner.getElementsByClassName('btn--ghost')[0];
+        var buttonPrimary = inner.getElementsByClassName('button')[0];
+
+        outer.onclick = function (event) {
+            console.log('Outer container clicked');
+            console.log('The click is from ', event.target);
+        };
+        center.onclick = function (event) {
+            console.log('Center container clicked');
+        };
+        inner.onclick = function (event) {
+            console.log('Inner container clicked');
+        };
+        buttonGhost.onclick = function (event) {
+            console.log('Ghost button clicked');
+            event.stopPropagation(); // Prevent event from bubbling up
+        };
+        buttonPrimary.onclick = function (event) {
+            console.log('Primary button clicked');
+            // event.stopPropagation(); // Prevent event from bubbling up
+        };
+    </script>
+</body>
+
+</html>

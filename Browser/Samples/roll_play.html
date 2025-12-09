@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Text Carousel Practice</title>
+    <link rel="stylesheet" href="../../styles.css" />
+    <style>
+        /* Local styles: carousel container and indicators */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            height: 4.5rem;
+            /* show one line of text for practice */
+        }
+
+        .carousel-track {
+            display: flex;
+            flex-direction: column;
+            transition: transform 300ms ease;
+            will-change: transform;
+        }
+
+        .carousel-item {
+            padding: 0.75rem 1rem;
+            min-height: 4.5rem;
+            display: flex;
+            align-items: center;
+            color: var(--text);
+            transition: all 300ms ease;
+        }
+
+        .carousel-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .indicators {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: #e5e7eb;
+            border: none;
+            cursor: pointer;
+        }
+
+        .indicator.active {
+            background: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <h1>Text Carousel Practice</h1>
+        <p>This is an HTML scaffold. Implement your carousel logic (auto/manual, loop, fade, etc.) in a separate
+            JavaScript file while practicing DOM APIs.</p>
+
+        <div class="card" id="textCarousel">
+            <div class="carousel" id="viewport">
+                <div class="carousel-track" id="track">
+                    <div class="carousel-item" style="display:block" data-index="0">Item 1: Welcome to JavaScript
+                        practice.</div>
+                    <div class="carousel-item" style="display:none" data-index="1">Item 2: Try implementing play and
+                        pause.</div>
+                    <div class="carousel-item" style="display:none" data-index="2">Item 3: Add indicators and prev/next
+                        buttons.</div>
+                    <div class="carousel-item" style="display:none" data-index="3">Item 4: Extend to vertical or fade
+                        effects.</div>
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="btn btn--ghost" id="prevBtn">Previous</button>
+                <button class="btn btn--ghost" id="nextBtn">Next</button>
+                <!-- <button class="btn" id="addC">Play</button> -->
+            </div>
+
+            <div class="indicators" id="indicators" role="tablist">
+                <button class="indicator active" role="tab" data-index="0"></button>
+                <button class="indicator" role="tab" data-index="1"></button>
+                <button class="indicator" role="tab" data-index="2"></button>
+                <button class="indicator" role="tab" data-index="3"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var prevBtn = document.getElementById("prevBtn");
+        var nextBtn = document.getElementById("nextBtn");
+        var indicators = document.getElementsByClassName("indicator");
+        var carouselItems = document.getElementsByClassName("carousel-item");
+        var current_item = 0;
+        prevBtn.onclick = function () {
+            current_item--;
+            if (current_item == -1) current_item = 3;
+            refreshView();
+        }
+        nextBtn.onclick = function () {
+            current_item++;
+            if (current_item == 4) current_item = 0;
+            refreshView();
+        }
+        indicators.onclick = function (event) {
+            const click_index = event.target.getAttribute("data-index");
+            if (click_index !== null) {
+                current_item = parseInt(click_index);
+                refreshView();
+            }
+        }
+        function refreshView() {
+            for (indicator of indicators) {
+                if (indicator.getAttribute("data-index") == current_item) {
+                    indicator.classList.add("active");
+                } else {
+                    indicator.classList.remove("active");
+                }
+            }
+            for (carosel of carouselItems) {
+                if (carosel.getAttribute("data-index") == current_item) {
+                    carosel.style.display = "block";
+                } else {
+                    carosel.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

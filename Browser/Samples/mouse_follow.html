@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Mouse Follower — HTML only</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            height: 3000px;
+            width: 3000px;
+        }
+
+        /* Cursor follower element — JS should update its position on mousemove */
+        #follower {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 120ms ease, width 180ms ease, height 180ms ease;
+        }
+
+        #follower svg {
+            width: 60%;
+            height: 60%;
+            display: block;
+        }
+
+        .hide-native-cursor {
+            cursor: none;
+        }
+
+        footer {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #9fbff6;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cursor follower element (no JS included in this file) -->
+    <div id="follower" aria-hidden="true" style="position: absolute;">
+        <!-- Simple SVG icon (customize as needed) -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="url(#g)" />
+            <defs>
+                <linearGradient id="g" x1="0" x2="1">
+                    <stop offset="0" stop-color="#7ec8ff" />
+                    <stop offset="1" stop-color="#1e90ff" />
+                </linearGradient>
+            </defs>
+            <path d="M10.5 8.5l3 3-3 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+    </div>
+</body>
+
+<script>
+    window.onmousemove = function (event) {
+        const pos_x = event.clientX;
+        const pos_y = event.clientY;
+        const follower = document.getElementById('follower');
+        follower.style.left = pos_x + 'px';
+        follower.style.top = pos_y + 'px';
+    }
+</script>
+
+</html>
