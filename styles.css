@@ -1,0 +1,310 @@
+/* styles.css — a compact, standard global stylesheet
+   Includes: reset, base typography, layout container, buttons, forms,
+   utilities, and responsive helpers. */
+
+/* 1. Simple reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+ul,
+ol,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+/* 2. Base document styles */
+:root {
+    --bg: #ffffff;
+    --text: #222222;
+    --muted: #6b7280;
+    --primary: #2563eb;
+    --primary-700: #1d4ed8;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --radius: 6px;
+    --max-width: 1100px;
+    --gap: 1rem;
+    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+html,
+body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 3. Layout helpers */
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: calc(var(--gap) * 0.75);
+    padding-right: calc(var(--gap) * 0.75);
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+}
+
+.col {
+    flex: 1 1 0;
+}
+
+/* 4. Headings & text */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--muted);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+small {
+    font-size: 0.875em;
+    color: var(--muted);
+}
+
+/* 5. Buttons */
+.button,
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--primary);
+    color: #fff;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 150ms ease, transform 100ms ease;
+}
+
+.btn:hover {
+    background: var(--primary-700);
+}
+
+/* 按下（active）时反色处理：保留下移反馈，同时将背景变为白色、文字变为主色并用内阴影模拟边框，避免触发布局移动 */
+.button.selected,
+.btn.selected {
+    /* transform: translateY(1px); */
+    background: #fff;
+    color: var(--primary);
+    /* 使用 inset box-shadow 模拟边框，避免改变元素外部尺寸 */
+    box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.18);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+}
+
+/* 6. Forms */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #fff;
+    color: var(--text);
+    outline: none;
+    transition: box-shadow 120ms ease, border-color 120ms ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: rgba(37, 99, 235, 0.6);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.form-row {
+    margin-bottom: 0.75rem;
+}
+
+/* 7. Cards */
+.card {
+    background: #fff;
+    border: 1px solid #eef2f7;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+}
+
+/* 8. Utilities */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 {
+    margin-top: 0.25rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mb-1 {
+    margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+/* 9. Accessibility helpers */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
+/* 10. Responsive tweaks */
+@media (max-width: 640px) {
+    :root {
+        --gap: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 11. Code block styling */
+pre,
+code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+}
+
+pre {
+    background: #0f172a;
+    color: #e6eef8;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    overflow: auto;
+}
+
+code {
+    background: #f3f4f6;
+    padding: 0.125rem 0.25rem;
+    border-radius: 4px;
+}
+
+/* End of styles.css */
